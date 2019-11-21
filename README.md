@@ -87,8 +87,13 @@ Using [`use-package`](https://jwiegley.github.io/use-package/) and assuming you
 put the Flutter SDK in `/Applications/flutter`:
 
 ```elisp
+;; Needed to use the :ensure-system-package macro
+(use-package use-package-ensure-system-package
+  :ensure t)
+
 ;; Assuming usage with dart-mode
 (use-package dart-mode
+  :ensure t
   :ensure-system-package (dart_language_server . "pub global activate dart_language_server")
   :custom
   (dart-format-on-save t)
@@ -96,6 +101,7 @@ put the Flutter SDK in `/Applications/flutter`:
 
 (use-package flutter
   :after dart-mode
+  :ensure t
   :bind (:map dart-mode-map
               ("C-M-x" . #'flutter-run-or-hot-reload))
   :custom
@@ -104,6 +110,7 @@ put the Flutter SDK in `/Applications/flutter`:
 ;; Optional
 (use-package flutter-l10n-flycheck
   :after flutter
+  :ensure t
   :config
   (flutter-l10n-flycheck-setup))
 ```
